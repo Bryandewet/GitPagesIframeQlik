@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript">
+      const webIntegrationId = "rmEl4GyMPGJg5zybO9bpR28nSJZt0FIE";
+      function login() {
+        function isLoggedIn() {
+          return fetch("https://cimt.eu.qlikcloud.com/api/v1/users/me", {
+            method: 'GET',
+            mode: 'cors',
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/json',
+              'qlik-web-integration-id': webIntegrationId,
+            },
+          }).then(response => {
+            return response.status === 200;
+          });
+        }
+        
+        return isLoggedIn().then(loggedIn => {
+          if (!loggedIn) {
+            // check login
+              window.top.location.href = "https://cimt.eu.qlikcloud.com/login?qlik-web-integration-id=" + webIntegrationId + "&returnto=" + top.location.href;
+            throw new Error('not logged in');
+          }
+        });
+        
+      }
+      login()
+    </script>
+  </head>
+  
+  <body style="height:600px;">
+      <iframe src="https://cimt.eu.qlikcloud.com/single/?appid=c51381f5-dea9-49ff-9e4f-284dac71757d&obj=QhpGfDr&theme=horizon&opt=ctxmenu,currsel" style="border:none;width:100%;
+      height:100%;"
+      sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
+  </body>
+</html>
