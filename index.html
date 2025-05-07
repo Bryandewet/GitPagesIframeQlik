@@ -27,7 +27,7 @@
 
       async function login() {
           if (jwtToken) {
-            const returnTo = encodeURIComponent(window.location.href);
+            const returnTo = 'https://bryandewet.github.io/GitPagesIframeQlik/';
             const loginUrl = `https://cimt.eu.qlikcloud.com/login/jwt-session?qlik-web-integration-id=${webIntegrationId}&token=${jwtToken}&returnto=${returnTo}`;
             window.location.href = loginUrl;
           } else {
