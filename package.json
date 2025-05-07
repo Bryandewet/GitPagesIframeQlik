@@ -1,7 +1,28 @@
 {
   "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "node-forge": "^1.3.1",
     "openssl": "^2.0.0"
-  }
+  },
+  "name": "gitpagesiframeqlik",
+  "version": "1.0.0",
+  "description": "",
+  "main": "generate-cert.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bryandewet/GitPagesIframeQlik.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bryandewet/GitPagesIframeQlik/issues"
+  },
+  "homepage": "https://github.com/Bryandewet/GitPagesIframeQlik#readme"
 }

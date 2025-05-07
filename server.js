@@ -1,4 +1,7 @@
------BEGIN RSA PRIVATE KEY-----
+const jwt = require('jsonwebtoken');
+
+// Replace with your actual private RSA key from Qlik Cloud
+const privateKey = `-----BEGIN RSA PRIVATE KEY-----
 MIIEogIBAAKCAQEAnuIoZWrDP/PjwisP9BpcnLGK2+ZepYOep4oY7/ynWp+qyApV
 4XMPZCDIyX0ePPd11etu3R8WUm4mRMzlenRIeW9JKpZFTlNrcK+zOcVHLkp8DE/O
 PeHIKBCf25DRPhztRv0Xsd5b3Bz+kEIFHBpKqCa6T8IMrPi9wKV1D6HOQxl8YHSe
@@ -24,4 +27,24 @@ y78mvyvSqQqqyv/3qX/EniHN8nVCJb9J0HHmoQsH/2R5K7xtR6epi+iU3Tx+06OJ
 tgSdAoGAMOyf4JFim6VqJwcCwI00BCoU/AS2SX1+fsEj8VWyVASlGm/AWFPjZNVM
 cKXQzrofA2CrFqX9guN0hMwMldm3H6Ktb1QN8RZV7QtY3Z589A+a+gWOIlNcZeWG
 WT/SzMLRu89J1IYH5M33PAjHuvYnNlsiHp+ypou+QHL8y5ySGGo=
------END RSA PRIVATE KEY-----
+-----END RSA PRIVATE KEY-----`;
+
+const clientId = 'juvz6q3bwpm2eac.eu.qlikcloud.com'; // Same as the 'iss' value
+const userEmail = 'bryan.dewet@cimt.nl';
+
+const payload = {
+  sub: userEmail,
+  email: userEmail,
+  name: "Static User",
+  email_verified: true,
+  iss: clientId,
+  aud: "qlik.api/login/jwt-session"
+};
+
+const token = jwt.sign(payload, privateKey, {
+  algorithm: 'RS256',
+  expiresIn: '5m'
+});
+
+console.log("Generated JWT:\n");
+console.log(token);
