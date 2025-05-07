@@ -1,42 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>Qlik JWT Embed</title>
+ 
     <script type="text/javascript">
       const webIntegrationId = "rmEl4GyMPGJg5zybO9bpR28nSJZt0FIE";
-      function login() {
-        function isLoggedIn() {
-          return fetch("https://cimt.eu.qlikcloud.com/api/v1/users/me", {
-            method: 'GET',
-            mode: 'cors',
-            credentials: 'include',
-            headers: {
-              'Content-Type': 'application/json',
-              'qlik-web-integration-id': webIntegrationId,
-            },
-          }).then(response => {
-            return response.status === 200;
-          });
-        }
-        
-        return isLoggedIn().then(loggedIn => {
-          if (!loggedIn) {
-            // check login
-              window.top.location.href = "https://cimt.eu.qlikcloud.com/login?qlik-web-integration-id=" + webIntegrationId + "&returnto=" + top.location.href;
-            throw new Error('not logged in');
-          }
+ 
+      // Replace this with your JWT token
+      const jwtToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiZGV3ZXRAYWcuY2ltdC5kZSIsImVtYWlsIjoiYmRld2V0QGFnLmNpbXQuZGUiLCJuYW1lIjoiU3RhdGljIFVzZXIiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoianV2ejZxM2J3cG0yZWFjLmV1LnFsaWtjbG91ZC5jb20iLCJhdWQiOiJxbGlrLmFwaS9sb2dpbi9qd3Qtc2Vzc2lvbiIsImlhdCI6MTc0NjY0MDIyMSwiZXhwIjoxNzQ2NjQwNTIxfQ.SMSHhV_fUbTxzGNumgOaRNWVJqWneQ6lBbZOEjGvRlMV7PGE8cP9HH31S105A5yv_S0l-qmfTBqz5bWloTbYLGB7o-tS6JCQZLpGI7nN9FzOHVcgqptahQvNZ8EsvQo7qViMmcpEcH1Pu0sICJ8aDF3t3fl_XJCZ3zsK4skLipi0Jn7HiAVti9A31N4-NdvlXAFtL3G9NxN8LJujGLZz1yt5PtZ1qZJIwIi_g2SDpo6GYWlTpgjkJoqBmum5-V46UhlPsVRTP6nZjmIzpvpf5iEZwiHXKsJotTYs2TvO170mG0AkuJccnCudt_1PGkH6_dR4FYHX9yEXQyopCCGvNg"; // Place your static JWT token here
+ 
+      async function isLoggedIn() {
+        const response = await fetch("https://cimt.eu.qlikcloud.com/api/v1/users/me", {
+          method: 'GET',
+          mode: 'cors',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+            'qlik-web-integration-id': webIntegrationId,
+          },
         });
-        
+        return response.status === 200;
       }
-      login()
-    </script>
-  </head>
-  
+ 
+      async function login() {
+          if (jwtToken) {
+            const returnTo = 'https://bryandewet.github.io/GitPagesIframeQlik/';
+            const loginUrl = `https://cimt.eu.qlikcloud.com/login/jwt-session?qlik-web-integration-id=${webIntegrationId}&token=${jwtToken}&returnto=${returnTo}`;
+            window.location.href = loginUrl;
+          } else {
+            console.error("No JWT token provided!");
+          }
+        }
+
+ 
+      login();
+</script>
+</head>
+ 
   <body style="height:600px;">
-    <iframe src="https://cimt.eu.qlikcloud.com/single/?appid=c51381f5-dea9-49ff-9e4f-284dac71757d&sheet=71ec1f03-7259-492f-a393-702b752df303&select=clearall" style="border:none;width:100%;
-    height:100%;"
-    ></iframe>
-  </body>
+<iframe
+      src="https://cimt.eu.qlikcloud.com/single/?appid=c51381f5-dea9-49ff-9e4f-284dac71757d&sheet=71ec1f03-7259-492f-a393-702b752df303&select=clearall"
+      style="border:none; width:100%; height:100%;"
+></iframe>
+</body>
 </html>
