@@ -26,8 +26,6 @@
       }
 
       async function login() {
-        const loggedIn = await isLoggedIn();
-        if (!loggedIn) {
           if (jwtToken) {
             const returnTo = encodeURIComponent(window.location.href);
             const loginUrl = `https://cimt.eu.qlikcloud.com/login/jwt-session?qlik-web-integration-id=${webIntegrationId}&token=${jwtToken}&returnto=${returnTo}`;
@@ -36,7 +34,7 @@
             console.error("No JWT token provided!");
           }
         }
-      }
+      
 
       login();
     </script>
