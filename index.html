@@ -6,49 +6,50 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <title>Qlik JWT Embed</title>
 
- <script>
-    const tenantUrl = 'https://cimt.eu.qlikcloud.com';
-    const webIntegrationId = 'rmEl4GyMPGJg5zybO9bpR28nSJZt0FIE';
-    const jwtToken = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiZGV3ZXRAYWcuY2ltdC5kZSIsImVtYWlsIjoiYmRld2V0QGFnLmNpbXQuZGUiLCJuYW1lIjoiU3RhdGljIFVzZXIiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoianV2ejZxM2J3cG0yZWFjLmV1LnFsaWtjbG91ZC5jb20iLCJhdWQiOiJxbGlrLmFwaS9sb2dpbi9qd3Qtc2Vzc2lvbiIsImlhdCI6MTc0Njc3MTc1NSwiZXhwIjoxNzQ2NzcyMDU1fQ.TirbDO5ntPo0D0bLrLYHNIsNwIroXBdAvvb41Ety_kaElU3Bnpmq_SxWU-pyNe8DO2XvVQdmddgrGKiMX9X7c1ZGBEKvOe-z2gMmWMaJ6T1Uxm6-lXVWEU3vYmi56Bphxqtu29xibw8WYo0EFQajYj8WpGgJu4hOMJpkt4VT0BuXiajfP3zu0p2wjyDm9KuGtvDXXJwUm8H15uuHr6KN_SVvioiZd10GLxEYjQ1mo84Lao-vzsN31sQ1L_YR3alxqRHJaW_LsJfe4RgPM8DzBWJVWpAe60BcDNVU9KS7dk-_J97nLKJrWbSRpEUTJuPRlB4rHMoI3wCAX5-1D90W5g'; 
+<script>
+  const tenantUrl = 'https://cimt.eu.qlikcloud.com';
+  const webIntegrationId = 'rmEl4GyMPGJg5zybO9bpR28nSJZt0FIE';
+  const jwtToken = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiZGV3ZXRAYWcuY2ltdC5kZSIsImVtYWlsIjoiYmRld2V0QGFnLmNpbXQuZGUiLCJuYW1lIjoiU3RhdGljIFVzZXIiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoianV2ejZxM2J3cG0yZWFjLmV1LnFsaWtjbG91ZC5jb20iLCJhdWQiOiJxbGlrLmFwaS9sb2dpbi9qd3Qtc2Vzc2lvbiIsImlhdCI6MTc0Njc3NDExOSwiZXhwIjoxNzQ2Nzc0NDE5fQ.TDMjM8XXNeEluEhGOPei8cWhWYq2ukDOk9gFWzG3Cg_xTW8auo6yA2ZR29vYQAK_lsWBFKQ7ItDAUz35o2DkfxwSW88pJ8LWUYtE7ua4GgLcfvO3Ryb6uj0ixW9Uci99RCnXerldp-wYBv9n7rl9vPcVrP1ZhEN0IYMZudxbw91p1VxwC0Sp8HE1EDcDkcZtMUMRWGPQyd2TjmRYNH4OH9V1RadAslm538n46eEiMx8AMXfiqOWRv_GzxWVqIJMvO2mbF9d75dqy7WUIjEvpPkFKb2iHiqzxYJStFhI4ZAUYNsTv8MuS5xLZk-ReVaQzwjkcs0nGVxKGtcaHCrqNog'; 
 
-    async function loginToQlik() {
-      try {
-        const csrfResponse = await fetch(`${tenantUrl}/api/v1/csrf-token`, {
-          credentials: 'include',
-          headers: {
-            'qlik-web-integration-id': webIntegrationId
-          }
-        });
+  async function loginToQlik() {
+    try {
 
-        const csrfToken = csrfResponse.headers.get('qlik-csrf-token');
-
-        const loginResponse = await fetch(`${tenantUrl}/login/jwt-session`, {
-          method: 'POST',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json',
-            'qlik-web-integration-id': webIntegrationId,
-            'qlik-csrf-token': csrfToken
-          },
-          body: JSON.stringify({ jwt: jwtToken })
-        });
-
-        if (loginResponse.status === 200) {
-          // Login successful — redirect to Qlik Hub or an app
-          window.location.href = `${tenantUrl}/hub`;
-        } else {
-          const errorText = await loginResponse.text();
-          console.error('Login failed:', errorText);
-          alert('Login failed. Check console for details.');
+      const csrfResponse = await fetch(`${tenantUrl}/api/v1/csrf-token`, {
+        credentials: 'include',
+        headers: {
+          'qlik-web-integration-id': webIntegrationId
         }
-      } catch (err) {
-        console.error('Error during login:', err);
-        alert('Login error. Check console for details.');
-      }
-    }
+      });
 
-    loginToQlik();
-  </script>
+      const csrfToken = csrfResponse.headers.get('qlik-csrf-token');
+
+
+      const loginResponse = await fetch(`${tenantUrl}/login/jwt-session`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'qlik-web-integration-id': webIntegrationId,
+          'qlik-csrf-token': csrfToken,
+          'Authorization': `Bearer ${jwtToken}`
+        }
+      });
+
+      if (loginResponse.ok) {
+        // Success — redirect to the hub
+        window.location.href = `${tenantUrl}/hub`;
+      } else {
+        const errorText = await loginResponse.text();
+        console.error('Login failed:', errorText);
+        alert('Login failed. Check console for details.');
+      }
+    } catch (err) {
+      console.error('Error during login:', err);
+      alert('Login error. Check console for details.');
+    }
+  }
+
+  loginToQlik();
+</script>
 </head>
  
   <body style="height:600px;">
