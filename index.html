@@ -7,7 +7,7 @@
 <title>Qlik JWT Embed</title>
 
 <script type ="text/javascript">
-
+/*
 const returnToken = async () => {
 const jwt = require('jsonwebtoken');
 const privateKey = `-----BEGIN RSA PRIVATE KEY-----
@@ -58,19 +58,20 @@ const token = jwt.sign(payload, privateKey, {
 return token
 };
 
-
-  let token = await returnToken();
+*/
+  
+  let token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiZGV3ZXRAYWcuY2ltdC5kZSIsImVtYWlsIjoiYmRld2V0QGFnLmNpbXQuZGUiLCJuYW1lIjoiU3RhdGljIFVzZXIiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoianV2ejZxM2J3cG0yZWFjLmV1LnFsaWtjbG91ZC5jb20iLCJhdWQiOiJxbGlrLmFwaS9sb2dpbi9qd3Qtc2Vzc2lvbiIsImlhdCI6MTc0Njc5OTMzNywiZXhwIjoxNzQ2ODAwNTM3fQ.CiEWXnZjrrJ0UV8MY780YnyXf5iMB3lwAGyWVNorL3AWnwPeJ0y1UEdHCY8w4nJ8xE0z5uNTa0L2buseETcQQZv2dhLRdA5R1LRG4viA6hU4VI0USj9t-u_9bX9RUMFtk_vdI8xKEW6D2L2jcsGigvX0TSngjmP23Ms5HxVIEvoYtiJxJ2or39w_wIbgGDoX0lqjcNy0bejipyZK5rNBY9c4WPU5hPhHns--RZ7GiOAuGj3SbFjsjmBwm-3nxhicAXkgEepcoDijAgXbOie8Ec5RUkanUFiGPRyjHg9pL-GPUT2XFAgIcZz8gzlZAEOERNlCtVP_VhEEfyoM5w5GOg';
   const tenantUrl = 'https://cimt.eu.qlikcloud.com';
   const webIntegrationId = 'rmEl4GyMPGJg5zybO9bpR28nSJZt0FIE';
 
-const login = async () => {
+const login =  () => {
   if (!token) {
     console.log('Token generation failed');
     return;
   }
 
   try {
-    const response = await fetch(`${tenantUrl}/login/jwt-session`, {
+    const response = fetch(`${tenantUrl}/login/jwt-session`, {
       method: 'POST',
       mode: 'cors',
       credentials: 'include',
@@ -91,7 +92,7 @@ const login = async () => {
   }
 };
 
-await login();
+login();
 </script>
 </head>
  
