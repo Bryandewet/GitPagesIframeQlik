@@ -60,7 +60,7 @@ return token
 
 */
   
-  let token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiZGV3ZXRAYWcuY2ltdC5kZSIsImVtYWlsIjoiYmRld2V0QGFnLmNpbXQuZGUiLCJuYW1lIjoiU3RhdGljIFVzZXIiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoianV2ejZxM2J3cG0yZWFjLmV1LnFsaWtjbG91ZC5jb20iLCJhdWQiOiJxbGlrLmFwaS9sb2dpbi9qd3Qtc2Vzc2lvbiIsImlhdCI6MTc0Njc5OTMzNywiZXhwIjoxNzQ2ODAwNTM3fQ.CiEWXnZjrrJ0UV8MY780YnyXf5iMB3lwAGyWVNorL3AWnwPeJ0y1UEdHCY8w4nJ8xE0z5uNTa0L2buseETcQQZv2dhLRdA5R1LRG4viA6hU4VI0USj9t-u_9bX9RUMFtk_vdI8xKEW6D2L2jcsGigvX0TSngjmP23Ms5HxVIEvoYtiJxJ2or39w_wIbgGDoX0lqjcNy0bejipyZK5rNBY9c4WPU5hPhHns--RZ7GiOAuGj3SbFjsjmBwm-3nxhicAXkgEepcoDijAgXbOie8Ec5RUkanUFiGPRyjHg9pL-GPUT2XFAgIcZz8gzlZAEOERNlCtVP_VhEEfyoM5w5GOg';
+  let token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiZGV3ZXRAYWcuY2ltdC5kZSIsImVtYWlsIjoiYmRld2V0QGFnLmNpbXQuZGUiLCJuYW1lIjoiU3RhdGljIFVzZXIiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoianV2ejZxM2J3cG0yZWFjLmV1LnFsaWtjbG91ZC5jb20iLCJhdWQiOiJxbGlrLmFwaS9sb2dpbi9qd3Qtc2Vzc2lvbiIsImlhdCI6MTc0Njc5OTY0OSwiZXhwIjoxNzQ2ODAwODQ5fQ.krTOAJanB52AlMa2A-boW6jI6QzjOBY9jRuDJkj0aVuUATd6z4ZmgYqNzLi6HNCt7ZOnuJWuScFpbBy4Q5YVIV6w3SGKS3D0OoIyssorAFiVNRKetZn8Onb9UrAwuTAdLEMxeTJiUJDmrkKEv_oknWUiIwGo3j2XB5vU03buMYBTqrgLgvmkBeTEQ4C-garLNYm5Hidiyz7_AJhlv5X1AP2Uat6wQ0keuxlB2qu7KyhzhfkdEBwC3HCseBSdJ_0exdWNiGHJoD2BZYjdwY0kx2y0iGXYenUiBVMREnGcPJZhdIUnKUieNhl5o_v4HnpuByafnhlqucCSzSImQND1fQ';
   const tenantUrl = 'https://cimt.eu.qlikcloud.com';
   const webIntegrationId = 'rmEl4GyMPGJg5zybO9bpR28nSJZt0FIE';
 
@@ -83,6 +83,7 @@ const login =  () => {
     });
 
     if (!response.ok) {
+      console.log(response);
       throw new Error('Failed to login via JWT');
     }
 
